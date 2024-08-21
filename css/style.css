@@ -1,0 +1,8 @@
+html {
+background-position: left bottom;
+background-size: cover;
+background-repeat: no-repeat;
+background-image: url("../images/back.jpg");
+background-attachment: fixed;
+overflow: hidden;
+}
