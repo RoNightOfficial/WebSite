@@ -403,7 +403,7 @@
 </div>
 
 <script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function () {
+  window.addEventListener('load', function () {
     const grid = document.querySelector('.grid');
     const cells = grid.querySelectorAll('.cell');
 
@@ -414,7 +414,6 @@
       const content = item.querySelector('article') || item;
       const contentHeight = content.getBoundingClientRect().height;
 
-      // Добавляем rowGap в расчет, чтобы gap учитывался
       const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
       item.style.setProperty('--row-span', rowSpan);
     }
@@ -423,13 +422,14 @@
       cells.forEach(cell => resizeMasonryItem(cell));
     }
 
+    // Запускаем после полной загрузки
     resizeAllMasonryItems();
 
-    window.addEventListener('resize', () => {
-      resizeAllMasonryItems();
-    });
+    // Пересчёт при изменении размера окна
+    window.addEventListener('resize', resizeAllMasonryItems);
   });
 </script>
+
 
 
 <script>
