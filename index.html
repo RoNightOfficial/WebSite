@@ -403,34 +403,34 @@
 </div>
 
 <script type="text/javascript">
-const grid = document.querySelector('.grid');
-const cells = grid.querySelectorAll('.cell');
+  document.addEventListener('DOMContentLoaded', function () {
+    const grid = document.querySelector('.grid');
+    const cells = grid.querySelectorAll('.cell');
 
-const rowHeight = 10; // совпадает с grid-auto-rows в CSS
-const rowGap = 10;    // совпадает с gap в CSS
+    const rowHeight = 10; // совпадает с grid-auto-rows в CSS
+    const rowGap = 10;    // совпадает с gap в CSS
 
-function resizeMasonryItem(item) {
-  const content = item.querySelector('article') || item;
+    function resizeMasonryItem(item) {
+      const content = item.querySelector('article') || item;
+      const contentHeight = content.getBoundingClientRect().height;
 
-  const contentHeight = content.getBoundingClientRect().height;
+      // Добавляем rowGap в расчет, чтобы gap учитывался
+      const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
+      item.style.setProperty('--row-span', rowSpan);
+    }
 
-  // Добавляем rowGap в расчет, чтобы gap учитывался
-  const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
+    function resizeAllMasonryItems() {
+      cells.forEach(cell => resizeMasonryItem(cell));
+    }
 
-  item.style.setProperty('--row-span', rowSpan);
-}
+    resizeAllMasonryItems();
 
-function resizeAllMasonryItems() {
-  cells.forEach(cell => resizeMasonryItem(cell));
-}
-
-resizeAllMasonryItems();
-
-window.addEventListener('resize', () => {
-  resizeAllMasonryItems();
-});
-
+    window.addEventListener('resize', () => {
+      resizeAllMasonryItems();
+    });
+  });
 </script>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
