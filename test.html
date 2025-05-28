@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Masonry Layout</title>
+</head>
+<style>
+ body {
+  background-color: #000;
+  font: 1.1em Arial, Helvetica, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+figure {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+
+figure > img {
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+
+figure a {
+  color: black;
+  text-decoration: none;
+}
+
+figcaption {
+  grid-row: 2;
+  grid-column: 1;
+  background-color: rgba(255,255,255,.5);
+  padding: .2em .5em;
+  justify-self: start;
+}
+
+.container {
+  column-count: 4;
+  column-gap: 10px;
+}
+</style>
+<body>
+   <section class="modal-card-body" style="min-height: 220px;">
+  <div class="container">
+  <div class="cell">
+    <a class="an" href="device\FIFINE_AmpliGame_SC3" style="display: block; color: inherit; text-decoration: none;">
+      <article class="message">
+        <div class="message-header">
+          <img src="images\S28294f251ffb41e89975c731b8bd8965A.jpg_640x640 копия.png" width="586" alt="Image">
+        </div>
+        <div class="message-body">
+          FIFINE AmpliGame SC3
+        </div>
+      </article>
+    </a>
+    </div>
+<!-- "FIFINE AmpliGame SC3" -->
+
+
+
+<!-- "Ulanzi TC001" -->
+    <div class="cell">
+    <a class="an" href="device\Ulanzi_TC001" style="display: block; color: inherit; text-decoration: none;">
+      <article class="message">
+        <div class="message-header">
+          <img src="images\51PaVlLSppL._AC_UF1000,1000_QL80_ копия.png" width="586" alt="Image">
+        </div>
+        <div class="message-body">
+          Ulanzi TC001
+        </div>
+      </article>
+    </a>
+    </div>
+<!-- "Ulanzi TC001" -->
+
+
+
+<!-- "Ajazz AKP153R" -->
+    <div class="cell">
+    <a class="an" href="device\Ajazz_AKP153R" style=" color: inherit; text-decoration: none;">
+      <article class="message">
+        <div class="message-header">
+          <img src="images\61Y4M5jg9dL._AC_UF1000,1000_QL80_ копия.png" width="586" alt="Image">
+        </div>
+        <div class="message-body">
+          Ajazz AKP153R
+        </div>
+      </article>
+    </a>
+    </div>
+<!-- "Ajazz AKP153R" -->
+
+
+<!-- "Ardor Katana" -->
+    <div class="cell">
+    <a class="an" href="device\Ardor_Katana" style=" color: inherit; text-decoration: none;">
+      <article class="message">
+        <div class="message-header">
+          <img src="images\ardorkatana.png" width="586" alt="Image">
+        </div>
+        <div class="message-body">
+          Ardor Katana
+        </div>
+      </article>
+    </a>
+    </div>
+<!-- "Ardor Katana" -->
+
+         <div class="cell">
+           <a class="an" href="device/epomaker-p75" style="display: block; color: inherit; text-decoration: none;">
+             <article class="message">
+               <div class="message-header">
+                 <img src="images/epomaker-p75.png" width="586" alt="Image">
+               </div>
+               <div class="message-body">
+                 Epomaker P75
+               </div>
+             </article>
+           </a>
+         </div>
+
+</div>
+</section>
+   
+</body>
+</html>

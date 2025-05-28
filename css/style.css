@@ -48,3 +48,38 @@ overflow: hidden;
     flex: none;
     width: 52%;
   }
+
+.modal-card-head{
+  padding: 13px;
+}
+.modal-card-foot{
+  display: flex;             /* используем flexbox */
+  flex-direction: column;    /* элементы по вертикали */
+  align-items: center;       /* по горизонтали центр */
+  justify-content: center;   /* по вертикали центр */
+   text-align: center;      
+  padding: 13px;
+}
+
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 10px;  /* базовая высота ряда */
+  gap: 10px;             /* вот он — gap между колонками и строками */
+}
+
+/* Устанавливаем высоту ячейки пропорционально её содержимому */
+.cell {
+  grid-row-end: span var(--row-span);
+}
+
+
+.message-header img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.hidden {
+  display: none !important;
+}

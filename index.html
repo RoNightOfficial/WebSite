@@ -50,27 +50,38 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head" style="display: flex; justify-content: space-between; align-items: center;">
-        <div class="columns is-vcentered" style="flex-grow: 1;">
-          <div class="column">
-            <figure class="image is-64x64">
-              <img class="is-rounded" src="images/ava.jpg" />
-            </figure>
-          </div>
+       <div class="columns is-mobile is-vcentered" style="flex-grow: 1; flex-wrap: wrap;">
+  <div class="column is-narrow">
+    <figure class="image is-64x64">
+      <img class="is-rounded" src="images/ava.jpg" />
+    </figure>
+  </div>
 
-          <div class="column is-half">
-            <h4 class="title is-4"><p class="modal-card-title">RoNight</p></h4>
-            <h1 class="subtitle"><a href="https://yandex.ru/search?text=@ronightoff">@ronightoff</a></h1>
-          </div>
-        
-         <!-- Поиск справа -->
-        <div class="column" style="min-width: 200px;">
-          <input id="searchInput" class="input is-dark" type="text" placeholder="Поиск девайсов..." style="width: 100%; padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc;">
-        </div>
+  <div class="column is-half-tablet is-full-mobile">
+    <h4 class="title is-4">
+      <p class="modal-card-title">RoNight</p>
+    </h4>
+    <h1 class="subtitle">
+      <a href="https://yandex.ru/search?text=@ronightoff">@ronightoff</a>
+    </h1>
+  </div>
+
+  <div class="column is-one-third-widescreen is-full-mobile" style="min-width: 0;">
+    <input
+      id="searchInput"
+      class="input is-dark"
+      type="text"
+      placeholder="Поиск девайсов..."
+      style="width: 100%; padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc;"
+    />
+  </div>
 </div>
+
       </header>
 
       <section class="modal-card-body" style="min-height: 220px;">
        <div class="grid">
+
 
 <!-- "FIFINE AmpliGame SC3" -->
     <div class="cell">
@@ -181,7 +192,7 @@
 
      <footer class="modal-card-foot" style="display: grid; justify-content: center;">
 
-      <div class="buttons">
+      <div class="buttons" style="justify-content: center;">
        <a target="_blank" href="https://www.youtube.com/@ronightoff" class="button">
         <span class="icon">
           <i class="fa-brands fa-youtube"></i>
@@ -194,12 +205,6 @@
         </span>
         <span>Telegram</span>
       </a>
-      <a target="_blank" href="https://www.tiktok.com/@ronightofficial" class="button">
-        <span class="icon">
-          <i class="fa-brands fa-tiktok"></i>
-        </span>
-        <span>TikTok</span>
-      </a>
     </div>
 
     <section>
@@ -211,7 +216,38 @@
 Сайт создан самолично RoNight ©. 2025.
 </div>
 
+<script type="text/javascript">
+const grid = document.querySelector('.grid');
+const cells = grid.querySelectorAll('.cell');
+
+const rowHeight = 10; // совпадает с grid-auto-rows в CSS
+const rowGap = 10;    // совпадает с gap в CSS
+
+function resizeMasonryItem(item) {
+  const content = item.querySelector('article') || item;
+
+  const contentHeight = content.getBoundingClientRect().height;
+
+  // Добавляем rowGap в расчет, чтобы gap учитывался
+  const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
+
+  item.style.setProperty('--row-span', rowSpan);
+}
+
+function resizeAllMasonryItems() {
+  cells.forEach(cell => resizeMasonryItem(cell));
+}
+
+resizeAllMasonryItems();
+
+window.addEventListener('resize', () => {
+  resizeAllMasonryItems();
+});
+
+</script>
+
 <script>
+ (function() {
   const searchInput = document.getElementById('searchInput');
   const cells = document.querySelectorAll('.cell');
 
@@ -221,12 +257,14 @@
     cells.forEach(cell => {
       const text = cell.querySelector('.message-body').textContent.toLowerCase();
       if (text.includes(query)) {
-        cell.style.display = 'block';
+        cell.style.display = '';
       } else {
         cell.style.display = 'none';
       }
     });
   });
+})();
+
 </script>
 
 </body>
