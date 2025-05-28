@@ -433,25 +433,25 @@ window.addEventListener('resize', () => {
 </script>
 
 <script>
- (function() {
-  const searchInput = document.getElementById('searchInput');
-  const cells = document.querySelectorAll('.cell');
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('searchInput');
+    const cells = document.querySelectorAll('.cell');
 
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase().trim();
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase().trim();
 
-    cells.forEach(cell => {
-      const text = cell.querySelector('.message-body').textContent.toLowerCase();
-      if (text.includes(query)) {
-        cell.style.display = '';
-      } else {
-        cell.style.display = 'none';
-      }
+      cells.forEach(cell => {
+        const text = cell.querySelector('.message-body').textContent.toLowerCase();
+        if (text.includes(query)) {
+          cell.style.display = '';
+        } else {
+          cell.style.display = 'none';
+        }
+      });
     });
   });
-})();
-
 </script>
+
 
 </body>
 </html>
