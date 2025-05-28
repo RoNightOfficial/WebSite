@@ -8,19 +8,46 @@ overflow: hidden;
 }
 .an {
   position: relative;
+  display: block;
+  border-radius: 6px;
+ 
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  user-select: none;
   color: #333;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  display: block;
-  text-decoration: none;
-  background: none;
-  border: 0;
-  padding: 2px 2px;
-  transition: transform 0.2s ease; /* плавный переход */
+
+  overflow: hidden; /* Крутая штука — обрезаем всё лишнее */
 }
 
-.an:hover {
-  transform: scale(1.05); /* немного увеличиваем */
+.an::before {
+  content: "";
+  position: absolute;
+  top: -15%;       /* Немного выступает за край сверху */
+  left: -15%;      /* Немного выступает слева */
+  width: 130%;     /* Теперь блик чуть больше карточки, а не в 2 раза */
+  height: 130%;    /* Аналогично */
+  pointer-events: none;
+  transition: background-position 0.2s ease;
+  border-radius: 1\6px;
+  z-index: 2;
 }
+
+
+/* Тень при наведении */
+.an.magnetic-hover {
+  filter: brightness(1.18);
+}
+
+.an::before {
+  background: var(--light-bg, radial-gradient(circle at 100% 0%, rgba(128, 128, 128, 0.05), transparent 100%));
+  background-position: var(--light-pos-x, 10%) var(--light-pos-y, 10%);
+}
+
+
+
 .input.is-dark {
   background-color: #222 !important;  /* Темный фон */
   color: #eee !important;             /* Светлый текст */

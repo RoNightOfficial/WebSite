@@ -452,6 +452,129 @@
   });
 </script>
 
+<script>
+  const cards = document.querySelectorAll('.an');
+
+cards.forEach(card => {
+  let currentX = 0;
+  let currentY = 0;
+  let targetX = 0;
+  let targetY = 0;
+
+  let currentScale = 1;
+  let targetScale = 1;
+
+  let isHovering = false;
+  let isReturning = false;
+  let returnAnimationId = null;
+
+  const damp = 0.06;       // плавность поворотов
+  const scaleDamp = 0.05;  // плавность зума
+  const maxRotation = 8;   // макс поворот
+
+  const updateTransform = () => {
+    if (!isReturning) {
+      currentX += (targetX - currentX) * damp;
+      currentY += (targetY - currentY) * damp;
+
+      currentScale += (targetScale - currentScale) * scaleDamp;
+
+      card.style.transform = `rotateX(${currentY}deg) rotateY(${currentX}deg) translateZ(10px) scale(${currentScale.toFixed(3)-0.01})`;
+
+      const bgX = 100 - ((targetX / maxRotation + 1) / 2) * 100;
+      const bgY = 100 - ((-targetY / maxRotation + 1) / 2) * 100;
+
+      card.style.setProperty('--light-pos-x', `${bgX}%`);
+      card.style.setProperty('--light-pos-y', `${bgY}%`);
+
+      card.style.setProperty(
+        '--light-bg',
+        `radial-gradient(circle at ${bgX}% ${bgY}%, rgba(128 128 128 / 0.05), transparent 100%)`
+      );
+
+      card.style.setProperty('--translate-z', `10px`);
+
+      if (
+        isHovering || 
+        Math.abs(currentX) > 0.01 || 
+        Math.abs(currentY) > 0.01 || 
+        Math.abs(currentScale - targetScale) > 0.001
+      ) {
+        requestAnimationFrame(updateTransform);
+      }
+    }
+  };
+
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    targetX = ((x - centerX) / centerX) * maxRotation;
+    targetY = ((y - centerY) / centerY) * -maxRotation;
+
+    targetScale = 1.06;  // при наведении увеличиваем
+
+    if (isReturning) {
+      isReturning = false;
+      if (returnAnimationId) {
+        cancelAnimationFrame(returnAnimationId);
+        returnAnimationId = null;
+      }
+      updateTransform();
+    }
+
+    if (!isHovering) {
+      isHovering = true;
+      card.classList.add('magnetic-hover');
+      updateTransform();
+    }
+  });
+
+  card.addEventListener('mouseleave', () => {
+    isHovering = false;
+    card.classList.remove('magnetic-hover');
+
+    isReturning = true;
+
+    let startX = currentX;
+    let startY = currentY;
+    let startScale = currentScale;
+    let startTime = null;
+    const duration = 300;
+
+    const animateBack = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      currentX = startX * (1 - progress);
+      currentY = startY * (1 - progress);
+      currentScale = startScale + (1 - startScale) * progress;
+
+      card.style.transform = `rotateX(${currentY}deg) rotateY(${currentX}deg) translateZ(0) scale(${currentScale.toFixed(3)})`;
+
+      if (progress < 1) {
+        returnAnimationId = requestAnimationFrame(animateBack);
+      } else {
+        card.style.transform = '';
+        isReturning = false;
+        returnAnimationId = null;
+      }
+    };
+
+    returnAnimationId = requestAnimationFrame(animateBack);
+
+    targetX = 0;
+    targetY = 0;
+    targetScale = 1;
+  });
+});
+
+</script>
+
 
 </body>
 </html>
